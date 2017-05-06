@@ -1,16 +1,10 @@
+import logging
 import timeit
 from math import log2, sqrt
+
 import numpy
-import logging
-from argparse import ArgumentParser
 
-
-def my_import(name):
-    components = name.split('.')
-    mod = __import__(components[0])
-    for comp in components[1:]:
-        mod = getattr(mod, comp)
-    return mod
+from complexity_project.main import return_base
 
 
 def approximate(x, y, degree):
@@ -20,7 +14,7 @@ def approximate(x, y, degree):
 def squared_error_x(coeff, x, y):
     err = []
     for i in range(0, len(x)):
-        err.append(abs(coeff[0] * x[i] + coeff[1] - y[i]))
+        err.append(abs(coeff[0] * x[i] + coeff[1] - y[i])) #y = ax+b
         return numpy.average(err)
 
 
@@ -58,24 +52,14 @@ def squared_error_sqrtx(coeff, x, y):
         err.append(abs(coeff[0] * sqrt(x[i]) + coeff[1] - y[i]))
         return numpy.average(err)
 
-
-def parse_args():
-    parser = ArgumentParser()
-    parser.add_argument('class_or_fun', help='Name of your class/function ,'
-                                             ' class must inherit from Base', type=str)
-    return parser.parse_args()
-
-args = parse_args()
-my_class = my_import(args.class_or_fun)
-class_object = my_class()
-
 logging.basicConfig(filename="logs.txt", level=logging.DEBUG)
 logging.info("Start")
 times_y = []
 n_x = []
+class_object = return_base()
 
 for i in range(1, 21):
-    n_x.append(i*150)
+    n_x.append(i*25)
 
 logging.debug("Array with n's created successfully")
 
@@ -151,6 +135,5 @@ print("Complexity O(" + complexities[errs.index(min(errs))] + ")")
 print("Coefficients :" + str(coeffs[complexities[errs.index(min(errs))]]))
 
 logging.info("Finished")
-
 
 
