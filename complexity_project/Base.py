@@ -2,20 +2,23 @@ from random import randint
 
 
 class Base:
-
-    table = []
+    alist = [] # sample
     n = 0
 
+    # setup should contain variables and structures initializations etc
+    # calculated complexity is n-dependent
     def setup(self, n):
-        self.n = n
+        self.n = n #sample
         for i in range(0, n):
-            self.table.append(randint(0, 100))
+            self.alist.append(randint(0, 100)) # need to import randint
+        # pass
 
+    # definition of to-measure function
     def function(self):
-        for i in range(0, self.n):
-            for a in range(0, self.n):
-                self.table.append(5)
+        sorted(self.alist) # sample
+        # pass
 
+    # cleaning up, deleting structures, etc
     def clean_up(self):
-        self.table = []
-
+        self.alist = [] # sample
+        # pass

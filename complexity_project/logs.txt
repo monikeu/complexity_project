@@ -1,0 +1,3 @@
+INFO:root:Start
+DEBUG:root:Arguments parsed
+INFO:root:Class not found
